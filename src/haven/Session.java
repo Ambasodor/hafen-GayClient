@@ -54,6 +54,7 @@ public class Session implements Resource.Resolver {
     public static final int SESSERR_PVER = 4;
     public static final int SESSERR_EXPR = 5;
     public static final int SESSERR_MESG = 6;
+    public final SessionDetails details;
 
     static final int ackthresh = 30;
     
@@ -327,6 +328,7 @@ public class Session implements Resource.Resolver {
 
     public Session(SocketAddress server, String username, byte[] cookie, Object... args) throws InterruptedException {
 	this.character = new CharacterInfo();
+	this.details = new SessionDetails(this);
 	this.conn = new Connection(server, username);
 	this.username = username;
 	this.glob = new Glob(this);

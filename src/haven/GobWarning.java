@@ -19,7 +19,18 @@ public class GobWarning extends GAttrib implements RenderTree.Node {
 	tgt = categorize(gob);
 	if(tgt != null) {
 	    if(WarnCFG.get(tgt, message)) {
-		gob.glob.sess.ui.message(String.format("%s spotted!", tgt.message), tgt.mcol, errsfx);
+		if (tgt == enemys) {
+		    Defer.later(() -> {
+			Audio.play(Resource.local().loadwait("custom/redPlayer"));
+			return (null);
+		    });
+		}
+		if (tgt == player){
+		    Defer.later(() -> {
+			Audio.play(Resource.local().loadwait("custom/whitePlayer"));
+			return (null);
+		    });
+		}
 	    }
 	    radius = new ColoredRadius(gob, tgt.radius, tgt.scol, tgt.ecol);
 	} else {
@@ -46,12 +57,15 @@ public class GobWarning extends GAttrib implements RenderTree.Node {
 	    return gem;
 	} else if (gob.is(GobTag.MIDGES)) {
 	    return midges;
+	} else if(gob.is(GobTag.ENEMY) && !gob.is(GobTag.FOE)) {
+	    return enemys;
 	}
 	return null;
     }
     
     public enum WarnTarget {
 	player(50, "Player", Color.RED, new Color(192, 0, 0, 128), new Color(255, 224, 96)),
+	enemys(50, "Enemy", Color.RED, new Color(192, 0, 0, 128), new Color(255, 224, 96)),
 	animal(50, "Dangerous animal", Color.RED, new Color(192, 0, 0, 128), new Color(255, 224, 96)),
 	gem(5, "Gem", Color.GREEN, new Color(0, 192, 122, 64), new Color(255, 90, 200, 128)),
 	midges(15, "Midges", Color.MAGENTA, new Color(255, 255, 255, 64), new Color(128, 0, 255, 128));
@@ -130,6 +144,11 @@ public class GobWarning extends GAttrib implements RenderTree.Node {
 	    box = add(new CheckBox("Warn about players", false), 0, y);
 	    box.a = WarnCFG.get(player, message);
 	    box.changed(val -> WarnCFG.set(player, message, val));
+	    y += 35;
+	    
+	    box = add(new CheckBox("Warn about enemys", false),0 , y);
+	    box.a = WarnCFG.get(enemys, message);
+	    box.changed(val -> WarnCFG.set(enemys, message, val));
 	    y += 35;
 	    
 	    box = add(new CheckBox("Highlight animals", false), 0, y);

@@ -22,7 +22,7 @@ public enum GobTag {
     
     CONTAINER, PROGRESSING, GATE,
     
-    PLAYER, ME, FRIEND, FOE,
+    PLAYER, ME, FRIEND, FOE, ENEMY,
     KO, DEAD, EMPTY, READY, FULL,
     
     MENU, PICKUP, HIDDEN;
@@ -101,8 +101,10 @@ public enum GobTag {
                 if(me != null) {
                     if(me) {
                         tags.add(ME);
-                    } else {
+                    } else if (KinInfo.isFoe(gob)) {
                         tags.add(KinInfo.isFoe(gob) ? FOE : FRIEND);
+                    } else {
+                        tags.add(KinInfo.isEnemy(gob) ? ENEMY : FRIEND);
                     }
                 }
             } else if(name.startsWith("gfx/kritter/") || ofType(name, LIKE_CRITTER)) {
