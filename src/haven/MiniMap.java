@@ -282,7 +282,6 @@ public class MiniMap extends Widget {
 	    
 	    if(isPlayer()) {
 		g.chcolor(kin() != null ? Color.WHITE : Color.RED);
-		g.aimage(Radar.Symbols.$circle.tex, sc, 0.5, 0.5);
 	    } else if(isDead()) {
 		img = icon.imggray();
 	    }
@@ -738,7 +737,6 @@ public class MiniMap extends Widget {
 		if(ppc == null)
 		    continue;
 		g.chcolor(Color.WHITE);
-		g.aimage(Radar.Symbols.$circle.tex, p2c(ppc), 0.5, 0.5);
 		g.chcolor(m.col.getRed(), m.col.getGreen(), m.col.getBlue(), 255);
 		g.rotimage(plp, p2c(ppc), plp.sz().div(2), -m.geta() - (Math.PI / 2));
 		g.chcolor();

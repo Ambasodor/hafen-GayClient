@@ -1803,6 +1803,7 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Message
     }
     
     public static final Resource errsfx = Resource.local().loadwait("sfx/error");
+
     private double lasterrsfx = 0;
     public void error(String msg) {
 	msg(msg, MsgType.ERROR);

@@ -40,6 +40,7 @@ import java.nio.file.*;
 import java.security.*;
 import javax.imageio.*;
 import java.awt.image.BufferedImage;
+import static java.lang.System.*;
 
 public class Resource implements Serializable {
     public static final Config.Variable<URL> resurl = Config.Variable.propu("haven.resurl", "");

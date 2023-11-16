@@ -189,6 +189,7 @@
     <copy file="local-config.properties" tofile="build/haven-config.properties" failonerror="false" quiet="true" />
   </target>
 
+
   <target name="bin" depends="jar, extlib/jogl, extlib/lwjgl-gl, res-jar">
     <mkdir dir="bin" />
     <copy todir="bin">
@@ -235,5 +236,13 @@
   <target name="clean-builtin-assets">
     <delete file="bin/hafen-res.jar" />
     <delete file="bin/builtin-res.jar" />
+  </target>
+
+  <target name="res" depends="client-res-java">
+    <exec executable="java" failifexecutionfails="false">
+      <arg line="-jar resources/LayerUtil.jar -re from to" />
+    </exec>
+    <copy todir="build/res/custom/" file="resources/to/whitePlayer.res" />
+    <copy todir="build/res/custom/" file="resources/to/redPlayer.res" />
   </target>
 </project>
