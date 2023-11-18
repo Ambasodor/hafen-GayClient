@@ -47,6 +47,8 @@ public class Fightview extends Widget {
     public Relation current = null;
     public Indir<Resource> blk, batk, iatk;
     public double atkcs, atkct;
+    public Fightview.Relation lastTarget;
+    
     
     @Override
     public void remove() {
@@ -87,7 +89,47 @@ public class Fightview extends Widget {
 	    lastuse = Utils.rtime();
 	}
     }
-
+    public void targetClosestCombat() {
+	try {
+	    Fightview.Relation closest = null;
+	    Gob closestGob = null;
+	    Gob rGob = null;
+	    double distanceRange = 0.0D;
+	    Gob player = this.ui.sess.glob.oc.getgob(ui.gui.map.plgob);
+	    
+	    Iterator var7 = this.lsrel.iterator();
+	    
+	    while (var7.hasNext()) {
+		Fightview.Relation r = (Fightview.Relation) var7.next();
+		if (r != null) {
+		    rGob = this.ui.sess.glob.oc.getgob(r.gobid);
+		    
+		    if (closestGob == null && rGob != null) {
+			closestGob = rGob;
+		    }
+		    
+		    if (closestGob != null && rGob != null) {
+			double closestDist = (double) player.getc().dist(closestGob.getc());
+			double rDist = (double) player.getc().dist(rGob.getc());
+			if (rDist < closestDist) {
+			    closestGob = rGob;
+			}
+		    }
+		}
+	    }
+	    
+	    if (closestGob != null) {
+		if (this.current.gobid != closestGob.id) {
+		    this.lastTarget = this.current;
+		}
+		
+		this.wdgmsg("bump", new Object[]{(int) closestGob.id});
+	    }
+	} catch (NullPointerException var15) {
+	    System.out.println(var15.toString());
+	}
+	
+    }
     public class Relbox extends Widget {
 	public final Relation rel;
 	public final Avaview ava;

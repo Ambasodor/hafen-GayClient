@@ -447,7 +447,8 @@ public class Fightsess extends Widget {
 	KeyBinding.get("fgt/9", KeyMatchFake.forcode(KeyEvent.VK_5, KeyMatch.S)),
     };
     public static final KeyBinding kb_relcycle =  KeyBinding.get("fgt-cycle", KeyMatch.forcode(KeyEvent.VK_TAB, KeyMatch.C), KeyMatch.S);
-
+    public static final KeyBinding kb_cltarg =  KeyBinding.get("fgt-closest", KeyMatch.forcode(KeyEvent.VK_SPACE, NONE), KeyMatch.S);
+    
     /* XXX: This is a bit ugly, but release message do need to be
      * properly sequenced with use messages in some way. */
     private class Release implements Runnable {
@@ -513,6 +514,13 @@ public class Fightsess extends Widget {
 	    }
 	    fv.wdgmsg("bump", (int)fv.lsrel.get(0).gobid);
 	    return(true);
+	}
+	if(kb_cltarg.key().match(ev, KeyMatch.S)) {
+	    try {
+		fv.targetClosestCombat();
+	    } catch (Exception e) {
+		e.printStackTrace();
+	    }
 	}
 	return(super.globtype(key, ev));
     }

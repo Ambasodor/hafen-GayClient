@@ -130,7 +130,6 @@ public class MapView extends PView implements DTarget, Console.Directory {
 	    );
 	}
     }
-    
     public class FollowCam extends Camera {
 	private final float fr = 0.0f, h = 10.0f;
 	private float ca, cd;

@@ -64,8 +64,8 @@ public class GobWarning extends GAttrib implements RenderTree.Node {
     }
     
     public enum WarnTarget {
-	player(50, "Player", Color.WHITE, new Color(255, 255, 255, 255), new Color(130, 188, 255)),
-	enemys(15, "Enemy", Color.RED, new Color(255, 0, 0, 255), new Color(255, 224, 96)),
+	player(15, "Player", Color.WHITE, new Color(255, 255, 255, 128), new Color(130, 188, 255)),
+	enemys(15, "Enemy", Color.RED, new Color(255, 0, 0, 128), new Color(255, 224, 96)),
 	animal(50, "Dangerous animal", Color.RED, new Color(192, 0, 0, 128), new Color(255, 224, 96)),
 	gem(5, "Gem", Color.GREEN, new Color(0, 192, 122, 64), new Color(255, 90, 200, 128)),
 	midges(15, "Midges", Color.MAGENTA, new Color(255, 255, 255, 64), new Color(128, 0, 255, 128));

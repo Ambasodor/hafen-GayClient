@@ -612,6 +612,7 @@ public class OptWnd extends WindowX {
 		y = addbtn(cont, String.format("Combat action %d", i + 1), Fightsess.kb_acts[i], y);
 	    */
 	    y = addbtn(cont, "Switch targets", Fightsess.kb_relcycle, y);
+	    y = addbtn(cont, "Switch to closest target", Fightsess.kb_cltarg, y);
 	    prev = adda(new PointBind(UI.scale(200)), scroll.pos("bl").adds(0, 10).x(scroll.sz.x / 2), 0.5, 0.0);
 	    prev = adda(new PButton(UI.scale(200), "Back", 27, back), prev.pos("bl").adds(0, 10).x(scroll.sz.x / 2), 0.5, 0.0);
 	    pack();
